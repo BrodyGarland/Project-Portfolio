@@ -12,9 +12,9 @@
       --bg:         #1c1e1c;
       --bg-card:    #212321;
       --bg-hover:   #252725;
-      --green:      #6b8f6b;   /* muted, earthy */
+      --green:      #6b8f6b;
       --green-soft: #4e6a4e;
-      --green-text: #8fa88f;   /* for small labels */
+      --green-text: #8fa88f;
       --text:       #d6d9d6;
       --muted:      #7a847a;
       --border:     #2c302c;
@@ -55,7 +55,6 @@
       color: var(--muted);
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      text-decoration: none;
     }
 
     .nav-name {
@@ -68,9 +67,69 @@
     .hero {
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
+      align-items: center;
       justify-content: center;
-      padding: 8rem 4rem 6rem;
+      padding: 8rem 6rem 5rem;
+      gap: 7rem;
+      position: relative;
+    }
+
+    .hero-left {
+      flex: 1;
+      max-width: 520px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero-right {
+      flex-shrink: 0;
+      width: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── Photo — rounded rectangle ── */
+    .photo-frame {
+      position: relative;
+      width: 260px;
+      height: 320px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.5s;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 10%;
+      border-radius: 18px;
+      display: block;
+      filter: grayscale(12%) contrast(1.03);
+    }
+
+    /* Soft shadow behind the photo for depth */
+    .photo-frame::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border-radius: 18px;
+      background: var(--green-soft);
+      opacity: 0.18;
+      filter: blur(18px);
+      z-index: -1;
+      transform: translateY(10px);
+    }
+
+    /* Thin rounded border offset slightly */
+    .photo-frame::after {
+      content: '';
+      position: absolute;
+      inset: -5px;
+      border-radius: 22px;
+      border: 1px solid var(--green-soft);
+      opacity: 0.5;
+      pointer-events: none;
     }
 
     .hero-label {
@@ -78,14 +137,14 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--green-text);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
       opacity: 0;
       animation: fadeUp 0.5s ease forwards 0.1s;
     }
 
     .hero-name {
       font-family: var(--font-head);
-      font-size: clamp(3.2rem, 8vw, 7rem);
+      font-size: clamp(3rem, 7vw, 6rem);
       font-weight: 800;
       line-height: 0.95;
       letter-spacing: -0.03em;
@@ -95,18 +154,47 @@
     }
 
     .hero-subtitle {
-      margin-top: 2rem;
-      max-width: 440px;
+      margin-top: 1.5rem;
+      max-width: 420px;
       font-size: 0.88rem;
       color: var(--muted);
       opacity: 0;
       animation: fadeUp 0.6s ease forwards 0.35s;
     }
 
-    .hero-cta {
+    /* ── Scroll cue ── */
+    .scroll-cue {
       margin-top: 2.5rem;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
       opacity: 0;
-      animation: fadeUp 0.6s ease forwards 0.5s;
+      animation: fadeUp 0.6s ease forwards 0.55s;
+      width: fit-content;
+    }
+
+    .scroll-cue-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+
+    .scroll-cue:hover .scroll-cue-label { color: var(--text); }
+
+    .scroll-cue-line {
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(to bottom, var(--muted), transparent);
+      animation: linePulse 2.2s ease-in-out infinite;
+    }
+
+    @keyframes linePulse {
+      0%, 100% { opacity: 0.35; transform: scaleY(0.9); }
+      50%       { opacity: 1;    transform: scaleY(1.05); }
     }
 
     .btn {
@@ -399,16 +487,9 @@
       color: var(--text);
     }
 
-    .about-link-detail {
-      font-size: 0.7rem;
-      color: var(--muted);
-    }
+    .about-link-detail { font-size: 0.7rem; color: var(--muted); }
 
-    .about-link-arrow {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-left: auto;
-    }
+    .about-link-arrow { font-size: 0.8rem; color: var(--muted); margin-left: auto; }
 
     /* ── Footer ── */
     footer {
@@ -434,14 +515,16 @@
     .reveal.visible { opacity: 1; transform: none; }
 
     /* ── Responsive ── */
-    @media (max-width: 680px) {
+    @media (max-width: 700px) {
       nav { padding: 1rem 1.5rem; }
-      .hero { padding: 7rem 1.5rem 4rem; }
+      .hero { flex-direction: column; padding: 7rem 1.5rem 4rem; gap: 2.5rem; align-items: flex-start; }
+      .hero-right { width: 100%; display: flex; justify-content: center; }
+      .photo-frame { width: 180px; height: 225px; }
       section { padding: 3.5rem 1.5rem; }
       .divider { margin: 0 1.5rem; }
       .projects-grid { grid-template-columns: 1fr; }
       .about-wrap { grid-template-columns: 1fr; gap: 2rem; }
-      footer { padding: 1.5rem; }
+      footer { padding: 1.5rem; font-size: 0.65rem; }
     }
   </style>
 </head>
@@ -454,14 +537,25 @@
 
   <!-- Hero -->
   <div class="hero">
-    <p class="hero-label">Hello I'm</p>
-    <h1 class="hero-name">Brody<br>Garland</h1>
-    <p class="hero-subtitle">
-      I am a Finance Major at Carlson School of Management and I love creating actionable solutions to real life problems!
-    </p>
-    <div class="hero-cta">
-      <a href="#projects" class="btn">View Projects ↓</a>
+
+    <div class="hero-left">
+      <p class="hero-label">Hello I'm</p>
+      <h1 class="hero-name">Brody<br>Garland</h1>
+      <p class="hero-subtitle">
+        I am a Finance Major at Carlson School of Management and I love creating actionable solutions to real life problems!
+      </p>
+      <a href="#projects" class="scroll-cue">
+        <span class="scroll-cue-label">Projects</span>
+        <div class="scroll-cue-line"></div>
+      </a>
     </div>
+
+    <div class="hero-right">
+      <div class="photo-frame">
+        <img src="Images/BrodyGarland.png" alt="Brody Garland" />
+      </div>
+    </div>
+
   </div>
 
   <div class="divider"></div>
@@ -477,7 +571,7 @@
         <span class="card-number">01</span>
         <div class="card-title">Personal Productivity Tracker</div>
         <p class="card-desc">Short description of this project — what it does and why you built it.</p>
-        <div class="card-tags"><span class="tag">N/A</span><span class="tag">N/A</span></div>
+        <div class="card-tags"><span class="tag">N/A</span></div>
         <div class="card-footer">
           <span class="card-hint">Click to read more</span>
           <span class="card-arrow">↗</span>
@@ -488,7 +582,7 @@
         <span class="card-number">02</span>
         <div class="card-title">Project Title Two</div>
         <p class="card-desc">Short description of this project — what it does and why you built it.</p>
-        <div class="card-tags"><span class="tag">N/A</span><span class="tag">N/A</span></div>
+        <div class="card-tags"><span class="tag">N/A</span></div>
         <div class="card-footer">
           <span class="card-hint">Click to read more</span>
           <span class="card-arrow">↗</span>
@@ -499,7 +593,7 @@
         <span class="card-number">03</span>
         <div class="card-title">Project Title Three</div>
         <p class="card-desc">Short description of this project — what it does and why you built it.</p>
-        <div class="card-tags"><span class="tag">N/A</span><span class="tag">N/A</span></div>
+        <div class="card-tags"><span class="tag">N/A</span></div>
         <div class="card-footer">
           <span class="card-hint">Click to read more</span>
           <span class="card-arrow">↗</span>
@@ -510,7 +604,7 @@
         <span class="card-number">04</span>
         <div class="card-title">Project Title Four</div>
         <p class="card-desc">Short description of this project — what it does and why you built it.</p>
-        <div class="card-tags"><span class="tag">N/A</span><span class="tag">N/A</span></div>
+        <div class="card-tags"><span class="tag">N/A</span></div>
         <div class="card-footer">
           <span class="card-hint">Click to read more</span>
           <span class="card-arrow">↗</span>
@@ -530,22 +624,22 @@
       <div class="about-text reveal">
         <h2 class="section-title" style="margin-bottom:1.1rem">A little<br>about me.</h2>
         <p><strong>Hey — I'm Brody.</strong> I enjoy building projects that solve real life issues!</p>
-        <p>I'm currently studying Finance at The University of Minnesota Carlson School of Management. </p>
-        <p>I love Orange Chicken</p>
+        <p>I'm currently studying Finance at The University of Minnesota Carlson School of Management.</p>
+        <p>I love Orange Chicken.</p>
       </div>
 
-      <div class="about-links reveal" style="transition-delay:0.1s">    
+      <div class="about-links reveal" style="transition-delay:0.1s">
 
         <a href="https://www.linkedin.com/in/brody-garland-091854382/" target="_blank" class="about-link">
           <span class="about-link-icon">🔗</span>
           <div>
             <div class="about-link-label">LinkedIn</div>
-            <div class="about-link-detail">Lets Connect!</div>
+            <div class="about-link-detail">Let's Connect!</div>
           </div>
           <span class="about-link-arrow">↗</span>
         </a>
 
-       <a href="BrodyGarlandResume.pdf" download="Brody_Garland_Resume.pdf" class="about-link">
+        <a href="BrodyGarlandResume.pdf" download="Brody_Garland_Resume.pdf" class="about-link">
           <span class="about-link-icon">📄</span>
           <div>
             <div class="about-link-label">Resume</div>
@@ -567,31 +661,20 @@
     </div>
   </section>
 
-  <footer>© 2026 Brody Garland - My projects include the use of A.I - It does not mean I lack basic technical ability & conceptualization</footer>
+  <footer>© 2026 Brody Garland — My projects include the use of A.I - It does not mean I lack basic technical ability & conceptualization.</footer>
 
-
-  <!-- ════════════════════════
-       MODALS
-       - Fill in the description
-       - Add tags that match your stack
-       - To add an image: remove the
-         placeholder div and uncomment
-         the <img> line beneath it
-       ════════════════════════ -->
-
+  <!-- MODALS -->
   <div class="modal-backdrop" id="modal-1" onclick="closeOnBackdrop(event,'modal-1')">
     <div class="modal">
       <button class="modal-close" onclick="closeModal('modal-1')">✕</button>
       <div class="modal-img-placeholder">image coming soon</div>
-      <!-- <img class="modal-img" src="images/project1.jpg" alt="Project One" /> -->
       <div class="modal-body">
         <div class="modal-number">Project 01</div>
-        <div class="modal-title">Project Title One</div>
-        <div class="modal-tags"><span class="tag">Python</span><span class="tag">Tag</span></div>
+        <div class="modal-title">Personal Productivity Tracker</div>
+        <div class="modal-tags"><span class="tag">N/A</span></div>
         <p class="modal-desc">
           Write your full description here. What problem does this solve?
           What did you build, and how? What was hard, and what did you learn?
-          A few paragraphs is perfect.
         </p>
         <div class="modal-links">
           <a href="#" class="btn" target="_blank">GitHub ↗</a>
@@ -605,11 +688,10 @@
     <div class="modal">
       <button class="modal-close" onclick="closeModal('modal-2')">✕</button>
       <div class="modal-img-placeholder">image coming soon</div>
-      <!-- <img class="modal-img" src="images/project2.jpg" alt="Project Two" /> -->
       <div class="modal-body">
         <div class="modal-number">Project 02</div>
         <div class="modal-title">Project Title Two</div>
-        <div class="modal-tags"><span class="tag">React</span><span class="tag">Tag</span></div>
+        <div class="modal-tags"><span class="tag">N/A</span></div>
         <p class="modal-desc">
           Write your full description here. What problem does this solve?
           What did you build, and how? What was hard, and what did you learn?
@@ -626,11 +708,10 @@
     <div class="modal">
       <button class="modal-close" onclick="closeModal('modal-3')">✕</button>
       <div class="modal-img-placeholder">image coming soon</div>
-      <!-- <img class="modal-img" src="images/project3.jpg" alt="Project Three" /> -->
       <div class="modal-body">
         <div class="modal-number">Project 03</div>
         <div class="modal-title">Project Title Three</div>
-        <div class="modal-tags"><span class="tag">JavaScript</span><span class="tag">Tag</span></div>
+        <div class="modal-tags"><span class="tag">N/A</span></div>
         <p class="modal-desc">
           Write your full description here. What problem does this solve?
           What did you build, and how? What was hard, and what did you learn?
@@ -647,11 +728,10 @@
     <div class="modal">
       <button class="modal-close" onclick="closeModal('modal-4')">✕</button>
       <div class="modal-img-placeholder">image coming soon</div>
-      <!-- <img class="modal-img" src="images/project4.jpg" alt="Project Four" /> -->
       <div class="modal-body">
         <div class="modal-number">Project 04</div>
         <div class="modal-title">Project Title Four</div>
-        <div class="modal-tags"><span class="tag">Tag</span><span class="tag">Tag</span></div>
+        <div class="modal-tags"><span class="tag">N/A</span></div>
         <p class="modal-desc">
           Write your full description here. What problem does this solve?
           What did you build, and how? What was hard, and what did you learn?
@@ -663,7 +743,6 @@
       </div>
     </div>
   </div>
-
 
   <script>
     const observer = new IntersectionObserver((entries) => {

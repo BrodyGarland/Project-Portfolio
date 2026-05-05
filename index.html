@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Name — Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <title>Brody Garland — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Inter:wght@700;800;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -18,7 +18,7 @@
       --text:       #d6d9d6;
       --muted:      #7a847a;
       --border:     #2c302c;
-      --font-head:  'Syne', sans-serif;
+      --font-head:  'Inter', sans-serif;
       --font-mono:  'DM Mono', monospace;
     }
 
@@ -167,18 +167,19 @@
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
+      gap: 1.25rem;
     }
 
     .card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 5px;
-      padding: 1.75rem;
+      padding: 2.75rem 2.5rem;
       cursor: pointer;
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
+      gap: 1rem;
+      min-height: 260px;
       transition: border-color 0.2s ease, background 0.2s ease;
     }
 
@@ -196,17 +197,17 @@
 
     .card-title {
       font-family: var(--font-head);
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       font-weight: 700;
       color: var(--text);
-      letter-spacing: -0.01em;
+      letter-spacing: -0.02em;
       line-height: 1.25;
     }
 
     .card-desc {
-      font-size: 0.82rem;
+      font-size: 0.88rem;
       color: var(--muted);
-      line-height: 1.6;
+      line-height: 1.65;
       flex: 1;
     }
 
@@ -453,10 +454,10 @@
 
   <!-- Hero -->
   <div class="hero">
-    <p class="hero-label">Hello —</p>
-    <h1 class="hero-name">Brody<br>Garland.</h1>
+    <p class="hero-label">Hello I'm</p>
+    <h1 class="hero-name">Brody<br>Garland</h1>
     <p class="hero-subtitle">
-      A collection of projects I've built and problems I've worked through.
+      I am a Finance Major at Carlson School of Management and I love creating actionable solutions to real life problems!
     </p>
     <div class="hero-cta">
       <a href="#projects" class="btn">View Projects ↓</a>
@@ -467,16 +468,16 @@
 
   <!-- Projects -->
   <section id="projects">
-    <p class="section-eyebrow reveal">Work</p>
-    <h2 class="section-title reveal">Projects.</h2>
+    <p class="section-eyebrow reveal">Some of my Work</p>
+    <h2 class="section-title reveal">Projects</h2>
 
     <div class="projects-grid">
 
       <div class="card reveal" style="transition-delay:0.05s" onclick="openModal('modal-1')">
         <span class="card-number">01</span>
-        <div class="card-title">Project Title One</div>
+        <div class="card-title">Personal Productivity Tracker</div>
         <p class="card-desc">Short description of this project — what it does and why you built it.</p>
-        <div class="card-tags"><span class="tag">Python</span><span class="tag">Tag</span></div>
+        <div class="card-tags"><span class="tag">N/A</span><span class="tag">N/A</span></div>
         <div class="card-footer">
           <span class="card-hint">Click to read more</span>
           <span class="card-arrow">↗</span>
@@ -487,7 +488,7 @@
         <span class="card-number">02</span>
         <div class="card-title">Project Title Two</div>
         <p class="card-desc">Short description of this project — what it does and why you built it.</p>
-        <div class="card-tags"><span class="tag">React</span><span class="tag">Tag</span></div>
+        <div class="card-tags"><span class="tag">N/A</span><span class="tag">N/A</span></div>
         <div class="card-footer">
           <span class="card-hint">Click to read more</span>
           <span class="card-arrow">↗</span>
@@ -498,7 +499,7 @@
         <span class="card-number">03</span>
         <div class="card-title">Project Title Three</div>
         <p class="card-desc">Short description of this project — what it does and why you built it.</p>
-        <div class="card-tags"><span class="tag">JavaScript</span><span class="tag">Tag</span></div>
+        <div class="card-tags"><span class="tag">N/A</span><span class="tag">N/A</span></div>
         <div class="card-footer">
           <span class="card-hint">Click to read more</span>
           <span class="card-arrow">↗</span>
@@ -509,7 +510,7 @@
         <span class="card-number">04</span>
         <div class="card-title">Project Title Four</div>
         <p class="card-desc">Short description of this project — what it does and why you built it.</p>
-        <div class="card-tags"><span class="tag">Tag</span><span class="tag">Tag</span></div>
+        <div class="card-tags"><span class="tag">N/A</span><span class="tag">N/A</span></div>
         <div class="card-footer">
           <span class="card-hint">Click to read more</span>
           <span class="card-arrow">↗</span>
@@ -528,9 +529,9 @@
 
       <div class="about-text reveal">
         <h2 class="section-title" style="margin-bottom:1.1rem">A little<br>about me.</h2>
-        <p><strong>Hey — I'm Brody.</strong> I build things, whether that's software, systems, or ideas.</p>
-        <p>I'm currently studying Finance at The University of Minnesota Carlson School of Management. .</p>
-        <p>I also love Orange Chicken .</p>
+        <p><strong>Hey — I'm Brody.</strong> I enjoy building projects that solve real life issues!</p>
+        <p>I'm currently studying Finance at The University of Minnesota Carlson School of Management. </p>
+        <p>I love Orange Chicken</p>
       </div>
 
       <div class="about-links reveal" style="transition-delay:0.1s">
@@ -539,34 +540,34 @@
           <span class="about-link-icon">🔗</span>
           <div>
             <div class="about-link-label">LinkedIn</div>
-            <div class="about-link-detail">/in/yourhandle</div>
+            <div class="about-link-detail">Lets Connect!</div>
           </div>
           <span class="about-link-arrow">↗</span>
         </a>
 
-        <a href="resume.pdf" download class="about-link">
+        <a href="resume.pdf" download="Brody_Garland_Resume.pdf" class="about-link">
           <span class="about-link-icon">📄</span>
           <div>
             <div class="about-link-label">Resume</div>
             <div class="about-link-detail">Download PDF</div>
           </div>
-          <span class="about-link-arrow">↓</span>
+          <span class="about-link-arrow">↗</span>
         </a>
 
         <a href="mailto:garla090@umn.edu" class="about-link">
           <span class="about-link-icon">✉️</span>
           <div>
-            <div class="about-link-label">Email</div>
-            <div class="about-link-detail">you@university.edu</div>
+            <div class="about-link-label">Contact Me!</div>
+            <div class="about-link-detail">garla090@umn.edu</div>
           </div>
-          <span class="about-link-arrow">→</span>
+          <span class="about-link-arrow">↗</span>
         </a>
 
       </div>
     </div>
   </section>
 
-  <footer>© 2026 Your Name</footer>
+  <footer>© 2026 Brody Garland - My projects include the use of A.I - It does not mean I lack basic technical ability & conceptualization</footer>
 
 
   <!-- ════════════════════════

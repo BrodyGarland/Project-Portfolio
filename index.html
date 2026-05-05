@@ -9,7 +9,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:         #1c1e1c;
+      --bg:         #272927;
       --bg-card:    #212321;
       --bg-hover:   #252725;
       --green:      #6b8f6b;
@@ -68,67 +68,78 @@
       min-height: 100vh;
       display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 8rem 6rem 5rem;
-      gap: 7rem;
+      justify-content: space-between;
+      padding: 8rem 5rem 5rem 6rem;
+      gap: 4rem;
       position: relative;
     }
 
     .hero-left {
-      flex: 1;
-      max-width: 520px;
+      flex: 0 0 auto;
+      max-width: 440px;
       display: flex;
       flex-direction: column;
     }
 
     .hero-right {
-      flex-shrink: 0;
-      width: 260px;
+      flex: 0 0 auto;
+      width: 380px;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
     }
 
-    /* ── Photo — rounded rectangle ── */
+    /* ── Photo — circle ── */
     .photo-frame {
       position: relative;
-      width: 260px;
-      height: 320px;
+      width: 400px;
+      height: 400px;
       opacity: 0;
       animation: fadeUp 0.7s ease forwards 0.5s;
+      margin-left: -260px;
+      margin-top: -40px;
+    }
+
+    .photo-clip {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
     }
 
     .photo-frame img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 10%;
-      border-radius: 18px;
+      object-position: 50% 100%;
+      border-radius: 50%;
       display: block;
       filter: grayscale(12%) contrast(1.03);
+      transform: scale(1.035);
+      transform-origin: center bottom;
     }
 
-    /* Soft shadow behind the photo for depth */
+    /* Soft shadow behind for depth */
     .photo-frame::before {
       content: '';
       position: absolute;
       inset: 8px;
-      border-radius: 18px;
+      border-radius: 50%;
       background: var(--green-soft);
-      opacity: 0.18;
-      filter: blur(18px);
+      opacity: 0.2;
+      filter: blur(22px);
       z-index: -1;
-      transform: translateY(10px);
+      transform: translateY(14px);
     }
 
-    /* Thin rounded border offset slightly */
+    /* Thin circle border offset slightly */
     .photo-frame::after {
       content: '';
       position: absolute;
-      inset: -5px;
-      border-radius: 22px;
+      inset: -7px;
+      border-radius: 50%;
       border: 1px solid var(--green-soft);
-      opacity: 0.5;
+      opacity: 0.45;
       pointer-events: none;
     }
 
@@ -519,7 +530,7 @@
       nav { padding: 1rem 1.5rem; }
       .hero { flex-direction: column; padding: 7rem 1.5rem 4rem; gap: 2.5rem; align-items: flex-start; }
       .hero-right { width: 100%; display: flex; justify-content: center; }
-      .photo-frame { width: 180px; height: 225px; }
+      .photo-frame { width: 220px; height: 220px; margin-left: 0; margin-top: 0; }
       section { padding: 3.5rem 1.5rem; }
       .divider { margin: 0 1.5rem; }
       .projects-grid { grid-template-columns: 1fr; }
@@ -552,7 +563,9 @@
 
     <div class="hero-right">
       <div class="photo-frame">
-        <img src="Images/BrodyGarland.png" alt="Brody Garland" />
+        <div class="photo-clip">
+          <img src="Images/BrodyGarland.png" alt="Brody Garland" />
+        </div>
       </div>
     </div>
 

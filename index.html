@@ -9,15 +9,15 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:         #272927;
-      --bg-card:    #212321;
-      --bg-hover:   #252725;
-      --green:      #6b8f6b;
-      --green-soft: #4e6a4e;
-      --green-text: #8fa88f;
-      --text:       #d6d9d6;
-      --muted:      #7a847a;
-      --border:     #2c302c;
+      --bg:         #2e2c28;
+      --bg-card:    #28261f;
+      --bg-hover:   #322f27;
+      --green:      #d4b87a;
+      --green-soft: #a08855;
+      --green-text: #e0c890;
+      --text:       #ebe6dc;
+      --muted:      #9a958a;
+      --border:     #423d33;
       --font-head:  'Inter', sans-serif;
       --font-mono:  'DM Mono', monospace;
     }
@@ -36,16 +36,16 @@
 
     /* ── Nav ── */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.2rem 4rem;
-      background: rgba(28, 30, 28, 0.9);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
+     position: fixed;
+     top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    padding: 1rem 4rem;
+    background: rgba(35, 33, 30, 0.88);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
     }
 
     .nav-title {
@@ -55,28 +55,70 @@
       color: var(--muted);
       letter-spacing: 0.14em;
       text-transform: uppercase;
+      justify-self: start;
     }
 
     .nav-name {
       font-size: 0.78rem;
       color: var(--muted);
       letter-spacing: 0.06em;
+      justify-self: end;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      width: 100%;
+    }
+
+    .nav-link,
+    .nav-link:link,
+    .nav-link:visited {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--green-text);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s, opacity 0.2s;
+      opacity: 0.85;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus,
+    .nav-link:active {
+      color: var(--green);
+      opacity: 1;
+      text-decoration: none;
+    }
+
+    .nav-link svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     /* ── Hero ── */
     .hero {
-      min-height: 100vh;
+      min-height: calc(100vh - 60px);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 8rem 5rem 5rem 6rem;
+      padding: 4.5rem 5rem 4rem 6rem;
       gap: 4rem;
       position: relative;
     }
 
     .hero-left {
-      flex: 0 0 auto;
-      max-width: 440px;
+      flex: 1 1 auto;
+      max-width: 560px;
       display: flex;
       flex-direction: column;
     }
@@ -96,8 +138,8 @@
       height: 400px;
       opacity: 0;
       animation: fadeUp 0.7s ease forwards 0.5s;
-      margin-left: -260px;
-      margin-top: -40px;
+      margin-left: -320px;
+      margin-top: 20px;
     }
 
     .photo-clip {
@@ -115,11 +157,10 @@
       border-radius: 50%;
       display: block;
       filter: grayscale(12%) contrast(1.03);
-      transform: scale(1.035);
+      transform: scale(1.03);
       transform-origin: center bottom;
     }
 
-    /* Soft shadow behind for depth */
     .photo-frame::before {
       content: '';
       position: absolute;
@@ -132,7 +173,6 @@
       transform: translateY(14px);
     }
 
-    /* Thin circle border offset slightly */
     .photo-frame::after {
       content: '';
       position: absolute;
@@ -166,23 +206,39 @@
 
     .hero-subtitle {
       margin-top: 1.5rem;
-      max-width: 420px;
+      max-width: 480px;
       font-size: 0.88rem;
       color: var(--muted);
       opacity: 0;
       animation: fadeUp 0.6s ease forwards 0.35s;
     }
 
+    /* About paragraphs merged into hero */
+    .hero-about {
+      margin-top: 2rem;
+      max-width: 480px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.45s;
+    }
+
+    .hero-about p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 0.85rem;
+    }
+
+    .hero-about p strong { color: var(--text); font-weight: 500; }
+
     /* ── Scroll cue ── */
     .scroll-cue {
-      margin-top: 2.5rem;
+      margin-top: 2.25rem;
       display: inline-flex;
       flex-direction: column;
       align-items: center;
       gap: 0.5rem;
       text-decoration: none;
       opacity: 0;
-      animation: fadeUp 0.6s ease forwards 0.55s;
+      animation: fadeUp 0.6s ease forwards 0.6s;
       width: fit-content;
     }
 
@@ -205,7 +261,7 @@
 
     @keyframes linePulse {
       0%, 100% { opacity: 0.35; transform: scaleY(0.9); }
-      50%       { opacity: 1;    transform: scaleY(1.05); }
+      50%      { opacity: 1;    transform: scaleY(1.05); }
     }
 
     .btn {
@@ -227,7 +283,7 @@
 
     .btn:hover {
       border-color: var(--green-soft);
-      background: rgba(78, 106, 78, 0.1);
+      background: rgba(160, 136, 85, 0.1);
     }
 
     /* ── Divider ── */
@@ -310,18 +366,14 @@
       flex: 1;
     }
 
-    .card-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.35rem;
-    }
+    .card-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
 
     .tag {
       font-size: 0.65rem;
       letter-spacing: 0.07em;
       padding: 0.18rem 0.55rem;
       border-radius: 2px;
-      background: rgba(107, 143, 107, 0.08);
+      background: rgba(212, 184, 122, 0.08);
       border: 1px solid var(--green-soft);
       color: var(--green-text);
       text-transform: uppercase;
@@ -356,7 +408,7 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(8, 10, 8, 0.78);
+      background: rgba(15, 13, 10, 0.78);
       backdrop-filter: blur(5px);
       z-index: 200;
       align-items: center;
@@ -367,7 +419,7 @@
     .modal-backdrop.open { display: flex; }
 
     .modal {
-      background: #202320;
+      background: #28261f;
       border: 1px solid var(--green-soft);
       border-radius: 6px;
       max-width: 640px;
@@ -383,18 +435,10 @@
       to   { opacity: 1; transform: none; }
     }
 
-    .modal-img {
-      width: 100%;
-      height: 210px;
-      object-fit: cover;
-      border-radius: 5px 5px 0 0;
-      display: block;
-    }
-
     .modal-img-placeholder {
       width: 100%;
       height: 120px;
-      background: #1a1c1a;
+      background: #1f1d18;
       border-radius: 5px 5px 0 0;
       display: flex;
       align-items: center;
@@ -454,54 +498,6 @@
 
     .modal-close:hover { color: var(--text); border-color: var(--green-soft); }
 
-    /* ── About ── */
-    .about-wrap {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
-    }
-
-    .about-text p {
-      font-size: 0.88rem;
-      color: var(--muted);
-      margin-bottom: 1rem;
-    }
-
-    .about-text p strong { color: var(--text); font-weight: 500; }
-
-    .about-links { display: flex; flex-direction: column; gap: 0.65rem; }
-
-    .about-link {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      text-decoration: none;
-      padding: 0.85rem 1rem;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      background: var(--bg-card);
-      transition: border-color 0.2s, background 0.2s;
-    }
-
-    .about-link:hover {
-      border-color: var(--green-soft);
-      background: var(--bg-hover);
-    }
-
-    .about-link-icon { font-size: 1rem; }
-
-    .about-link-label {
-      font-family: var(--font-head);
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .about-link-detail { font-size: 0.7rem; color: var(--muted); }
-
-    .about-link-arrow { font-size: 0.8rem; color: var(--muted); margin-left: auto; }
-
     /* ── Footer ── */
     footer {
       border-top: 1px solid var(--border);
@@ -526,15 +522,22 @@
     .reveal.visible { opacity: 1; transform: none; }
 
     /* ── Responsive ── */
-    @media (max-width: 700px) {
-      nav { padding: 1rem 1.5rem; }
+    @media (max-width: 800px) {
+      nav {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        padding: 0.85rem 1.25rem;
+        text-align: center;
+      }
+      .nav-title, .nav-name { justify-self: center; }
+      .nav-links { gap: 1.1rem; }
+      .nav-link span { display: none; }
       .hero { flex-direction: column; padding: 7rem 1.5rem 4rem; gap: 2.5rem; align-items: flex-start; }
       .hero-right { width: 100%; display: flex; justify-content: center; }
       .photo-frame { width: 220px; height: 220px; margin-left: 0; margin-top: 0; }
       section { padding: 3.5rem 1.5rem; }
       .divider { margin: 0 1.5rem; }
       .projects-grid { grid-template-columns: 1fr; }
-      .about-wrap { grid-template-columns: 1fr; gap: 2rem; }
       footer { padding: 1.5rem; font-size: 0.65rem; }
     }
   </style>
@@ -543,10 +546,42 @@
 
   <nav>
     <span class="nav-title">Project Portfolio</span>
+
+    <div class="nav-links">
+      <a href="https://www.linkedin.com/in/brody-garland-091854382/" target="_blank" class="nav-link" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <line x1="8" y1="10" x2="8" y2="17"/>
+          <circle cx="8" cy="6.5" r="0.6" fill="currentColor" stroke="none"/>
+          <path d="M12 17v-4.5a2.5 2.5 0 0 1 5 0V17"/>
+          <line x1="12" y1="10" x2="12" y2="17"/>
+        </svg>
+        <span>LinkedIn</span>
+      </a>
+
+      <a href="BrodyGarlandResume.pdf" download="Brody_Garland_Resume.pdf" class="nav-link" aria-label="Resume">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 3 14 8 19 8"/>
+          <line x1="9" y1="13" x2="15" y2="13"/>
+          <line x1="9" y1="16" x2="13" y2="16"/>
+        </svg>
+        <span>Resume</span>
+      </a>
+
+      <a href="mailto:garla090@umn.edu" class="nav-link" aria-label="Email">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="5" width="18" height="14" rx="2"/>
+          <polyline points="3 7 12 13 21 7"/>
+        </svg>
+        <span>Email</span>
+      </a>
+    </div>
+
     <span class="nav-name">Brody Garland</span>
   </nav>
 
-  <!-- Hero -->
+  <!-- Hero (with About merged in) -->
   <div class="hero">
 
     <div class="hero-left">
@@ -555,6 +590,13 @@
       <p class="hero-subtitle">
         I am a Finance Major at Carlson School of Management and I love creating actionable solutions to real life problems!
       </p>
+
+      <div class="hero-about">
+        <p><strong>A little about me —</strong> I enjoy building projects that solve real life issues!</p>
+        <p>I'm currently studying Finance at The University of Minnesota Carlson School of Management.</p>
+        <p>I love Orange Chicken.</p>
+      </div>
+
       <a href="#projects" class="scroll-cue">
         <span class="scroll-cue-label">Projects</span>
         <div class="scroll-cue-line"></div>
@@ -624,53 +666,6 @@
         </div>
       </div>
 
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- About -->
-  <section id="about">
-    <p class="section-eyebrow reveal">About</p>
-    <div class="about-wrap">
-
-      <div class="about-text reveal">
-        <h2 class="section-title" style="margin-bottom:1.1rem">A little<br>about me.</h2>
-        <p><strong>Hey — I'm Brody.</strong> I enjoy building projects that solve real life issues!</p>
-        <p>I'm currently studying Finance at The University of Minnesota Carlson School of Management.</p>
-        <p>I love Orange Chicken.</p>
-      </div>
-
-      <div class="about-links reveal" style="transition-delay:0.1s">
-
-        <a href="https://www.linkedin.com/in/brody-garland-091854382/" target="_blank" class="about-link">
-          <span class="about-link-icon">🔗</span>
-          <div>
-            <div class="about-link-label">LinkedIn</div>
-            <div class="about-link-detail">Let's Connect!</div>
-          </div>
-          <span class="about-link-arrow">↗</span>
-        </a>
-
-        <a href="BrodyGarlandResume.pdf" download="Brody_Garland_Resume.pdf" class="about-link">
-          <span class="about-link-icon">📄</span>
-          <div>
-            <div class="about-link-label">Resume</div>
-            <div class="about-link-detail">Download PDF</div>
-          </div>
-          <span class="about-link-arrow">↗</span>
-        </a>
-
-        <a href="mailto:garla090@umn.edu" class="about-link">
-          <span class="about-link-icon">✉️</span>
-          <div>
-            <div class="about-link-label">Contact Me!</div>
-            <div class="about-link-detail">garla090@umn.edu</div>
-          </div>
-          <span class="about-link-arrow">↗</span>
-        </a>
-
-      </div>
     </div>
   </section>
 
